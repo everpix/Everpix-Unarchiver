@@ -1,0 +1,10 @@
+"SELECT_DATABASE_BUTTON" = "Select Database";
+"SELECT_DESTINATION_BUTTON" = "Select Export Folder";
+
+"ALERT_DATABASE_TITLE" = "Failed to open database";
+"ALERT_DATABASE_MESSAGE" = "Check application log in Window menu for errors.";
+"ALERT_DATABASE_BUTTON" = "OK";
+
+"ALERT_EXPORT_TITLE" = "%i photo(s) failed to export";
+"ALERT_EXPORT_MESSAGE" = "Check application log in Window menu for errors.";
+"ALERT_EXPORT_BUTTON" = "OK";
