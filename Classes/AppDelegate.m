@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#import <objc/runtime.h>
-
 #import "AppDelegate.h"
 #import "Archive.h"
 
@@ -30,26 +28,16 @@
   LoggingSetMinimumLevel(kLogLevel_Info);
 #endif
   
-  NSString* path;
-#ifndef NDEBUG
-  NSArray* arguments = [[NSProcessInfo processInfo] arguments];
-  if (arguments.count >= 2) {
-    path = [arguments objectAtIndex:1];
-  } else
-#endif
-  {
-    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
-    [openPanel setCanChooseDirectories:NO];
-    [openPanel setCanChooseFiles:YES];
-    [openPanel setAllowedFileTypes:[NSArray arrayWithObject:@"sqlite"]];
-    [openPanel setPrompt:NSLocalizedString(@"SELECT_DATABASE_BUTTON", nil)];
-    if ([openPanel runModal] != NSFileHandlingPanelOKButton) {
-      [NSApp terminate:nil];
-    }
-    path = [[openPanel URL] path];
+  NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+  [openPanel setCanChooseDirectories:NO];
+  [openPanel setCanChooseFiles:YES];
+  [openPanel setAllowedFileTypes:[NSArray arrayWithObject:@"sqlite"]];
+  [openPanel setPrompt:NSLocalizedString(@"SELECT_DATABASE_BUTTON", nil)];
+  if ([openPanel runModal] != NSFileHandlingPanelOKButton) {
+    [NSApp terminate:nil];
   }
   
-  _archive = [[EverpixArchive alloc] initWithPath:path];
+  _archive = [[EverpixArchive alloc] initWithPath:[[openPanel URL] path]];
   if (_archive) {
     EverpixUser* user = [_archive fetchUser];
     if (user) {
